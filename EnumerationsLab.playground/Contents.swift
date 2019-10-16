@@ -6,21 +6,37 @@ import UIKit
 
 // Your code here
 
+enum iOSDeviceType {
+    case iPhone
+    case iPad
+    case iWatch
+}
+
+var myiPad = iOSDeviceType.iPad
+
 // Uncomment the lines below to test your solution
 
 //let myiPad = iOSDeviceType.iPad
-//assert(myiPad == .iPad)
+assert(myiPad == .iPad)
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
 
+enum iOSDeviceType1 {
+    case iPhone(String)
+    case iPad(String)
+    case iWatch
+}
+
+var myPhone = iOSDeviceType1.iPhone("8+")
+
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+switch myPhone {
+case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myPhone)")
+}
 
 // Question Two
 
@@ -41,14 +57,33 @@ enum Step {
 
 // Your function here
 
+func getPosition(startingAt position: (Int, Int), afterSteps steps: [Step]) -> (Int, Int){
+    
+    var startingPos = position
+    for stepsToGoThrough in  steps {
+        switch stepsToGoThrough {
+        case .up:
+            startingPos.1 += 1
+        case .down:
+            startingPos.1 -= 1
+        case .right:
+            startingPos.0 += 1
+        case .left:
+            startingPos.0 -= 1
+        }
+    }
+    
+    return startingPos
+}
+
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
-//
-//assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [.up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+
+assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
 
 // Question Three
 
@@ -63,20 +98,37 @@ enum Coin: Int {
 
 // Your function here
 
+func getTotalValue(from arr: [(number: Int, coin: Coin)]) -> Int {
+    
+    var totalValue = 0
+    for coins in arr {
+        if coins.coin == .penny {
+            totalValue += (coins.number) * Coin.penny.rawValue
+        } else if coins.coin == .nickle{
+            totalValue += (coins.number) * Coin.nickle.rawValue
+        } else if coins.coin == .dime {
+            totalValue += (coins.number) * Coin.dime.rawValue
+        } else if coins.coin == .quarter {
+            totalValue += (coins.number) * Coin.quarter.rawValue
+        }
+    }
+    return totalValue
+}
+
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
-//
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
+
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
 
 // Question Four
 
@@ -85,15 +137,41 @@ enum Coin: Int {
 
 // Your code here
 
+enum Day:String {
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    case sunday
+    
+    func isWeekday() -> Bool {
+        let message = "is a weekday"
+        let message1 = "is not a weekday"
+        switch self {
+        case .saturday:
+            print(self.rawValue, message1)
+            return false
+        case .sunday:
+            print(self.rawValue, message1)
+            return false
+        default:
+            print(self.rawValue, message)
+            return true
+        }
+    }
+}
+
 // Uncomment the lines below to test your solution
 
-//assert(Day.monday.isWeekday() == true, "Monday is a weekday")
-//assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
-//assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
-//assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
-//assert(Day.friday.isWeekday() == true, "Friday is a weekday")
-//assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
-//assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
+assert(Day.monday.isWeekday() == true, "Monday is a weekday")
+assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
+assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
+assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
+assert(Day.friday.isWeekday() == true, "Friday is a weekday")
+assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
+assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
 
 // Question Five
 
@@ -105,17 +183,40 @@ enum Coin: Int {
 
 // Your code here
 
+enum HandShape {
+    case rock
+    case paper
+    case scissors
+}
+
+enum MatchResult {
+    case win
+    case draw
+    case lose
+}
+
+func matchResult(fromPlayerOneShape shape1: HandShape, andPlayerTwoShape shape2: HandShape) -> MatchResult {
+    
+    if shape1 == shape2 {
+        return MatchResult.draw
+    } else if (shape1 == .paper && shape2 == .rock) || (shape1 == .rock && shape2 == .scissors) || (shape1 == .scissors && shape2 == .paper){
+        return MatchResult.win
+    } else {
+        return MatchResult.lose
+    }
+}
+
 // Uncomment the lines below to test your solution
 
-//let testCases: [(HandShape, HandShape, MatchResult)] = [
-//    (.rock, .paper, .lose),
-//    (.paper, .paper, .draw),
-//    (.scissors, .rock, .lose),
-//    (.rock, .scissors, .win)
-//]
-//
-//for testCase in testCases {
-//    let expectedOutput = testCase.2
-//    let output = matchResult(fromPlayerOneShape: testCase.0, andPlayerTwoShape: testCase.1)
-//    assert(output == expectedOutput, "Was execting \(expectedOutput), but got \(output) for inputs \(testCase.0) and \(testCase.1)")
-//}
+let testCases: [(HandShape, HandShape, MatchResult)] = [
+    (.rock, .paper, .lose),
+    (.paper, .paper, .draw),
+    (.scissors, .rock, .lose),
+    (.rock, .scissors, .win)
+]
+
+for testCase in testCases {
+    let expectedOutput = testCase.2
+    let output = matchResult(fromPlayerOneShape: testCase.0, andPlayerTwoShape: testCase.1)
+    assert(output == expectedOutput, "Was execting \(expectedOutput), but got \(output) for inputs \(testCase.0) and \(testCase.1)")
+}
