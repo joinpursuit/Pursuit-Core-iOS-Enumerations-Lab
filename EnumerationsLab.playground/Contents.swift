@@ -4,23 +4,32 @@ import UIKit
 
 // a. Define an enumeration called iOSDeviceType with member values iPhone, iPad, iWatch. Create a variable called myiPad and assign it to .iPad.
 
-// Your code here
+// Answer:
+enum iOSDeviceType {
+    case iPhone(modNum: String)
+    case iPad(String)
+    case iWatch
+}
+var myiPad = iOSDeviceType.iPad
 
 // Uncomment the lines below to test your solution
 
-//let myiPad = iOSDeviceType.iPad
-//assert(myiPad == .iPad)
+// let myiPad = iOSDeviceType.iPad
+// assert(myiPad == .iPad)
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
-// Your code here
+// Answer:
+
+let myPhone = iOSDeviceType.iPhone(modNum: "8+")
 
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+
+switch myPhone {
+case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myPhone)")
+}
 
 // Question Two
 
@@ -31,9 +40,30 @@ import UIKit
 //A step .right will increase the x coordinate by 1.
 //A step .left will decrease the x coordinate by 1.
 
+func getPosition(startingAt: (Int, Int), afterSteps: [Step]) -> (Int, Int) {
+    // to reference the tuple use afterSteps.0(x) and afterSteps.1(y)
+    // let stepTrial = Step.up //??
+    
+    var x = startingAt.0
+    var y = startingAt.1
+    
+    for step in afterSteps {
+     switch step {
+        case .up:
+            y += 1
+        case .down:
+           y -= 1
+        case .right:
+            x += 1
+        case .left:
+            x -= 1
+    }
+}
+    return (x , y)
+}
 
 enum Step {
-    case up
+    case up //
     case down
     case left
     case right
@@ -43,18 +73,18 @@ enum Step {
 
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
-//
-//assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [.up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+
+assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
 
 // Question Three
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
 
-enum Coin: Int {
+enum Coin: Int { // rawValue of type Int
     case penny = 1
     case nickle = 5
     case dime = 10
