@@ -5,22 +5,37 @@ import UIKit
 // a. Define an enumeration called iOSDeviceType with member values iPhone, iPad, iWatch. Create a variable called myiPad and assign it to .iPad.
 
 // Your code here
+enum iOSDeviceType  {
+    case iPhone
+    case iPad
+    case iWatch
+}
 
-// Uncomment the lines below to test your solution
+let myiPad = iOSDeviceType.iPad
+
+ //Uncomment the lines below to test your solution
 
 //let myiPad = iOSDeviceType.iPad
-//assert(myiPad == .iPad)
+assert(myiPad == .iPad)
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
+enum iOSDeviceType2  {
+    case iPhone2(String)
+    case iPad2(String)
+    case iWatch2
+}
+
+let myiPad2 = iOSDeviceType2.iPad2("")
+let myiPhone2 = iOSDeviceType2.iPhone2("8+")
 
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+switch myiPhone2 {
+case let .iPhone2(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myiPhone2)")
+}
 
 // Question Two
 
@@ -33,13 +48,32 @@ import UIKit
 
 
 enum Step {
-    case up
-    case down
-    case left
-    case right
+    case up(Int)
+    case down(Int)
+    case left(Int)
+    case right(Int)
 }
 
+
+
 // Your function here
+func getPosition(startingAt : (x : Int, y : Int), afterSteps : [Step]) // -> (Int, Int)
+{
+    
+    var mySteps : [Step] = []
+    
+    var stepDown = Step.down(-1)
+    var stepUp = Step.up(1)
+    var stepLeft = Step.left(-1)
+    var stepRight = Step.right(1)
+    
+    mySteps[0] = stepUp
+    for element in mySteps    {
+        if element == stepDown
+    }
+    
+    
+}
 
 // Uncomment the lines below to test your solution
 
