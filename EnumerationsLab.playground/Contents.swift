@@ -86,13 +86,14 @@ func getTotalValue(from arr: [(number: Int, coin: Coin)]) -> Int {
     var sum = 0
     
     for element in arr {
-        if element.1 == .penny {
+        switch element.coin {
+        case .penny:
             sum += element.0 * 1
-        } else if element.1 == .nickle {
+        case .nickle:
             sum += element.0 * 5
-        } else if element.1 == .dime {
+        case .dime:
             sum += element.0 * 10
-        } else if element.1 == .quarter {
+        case .quarter:
             sum += element.0 * 25
         }
     }
