@@ -59,17 +59,19 @@ enum Step {
 // Your function here
 func getPosition(startingAt : (x : Int, y : Int), afterSteps : [Step]) // -> (Int, Int)
 {
-    
-    var mySteps : [Step] = []
-    
-    var stepDown = Step.down(-1)
-    var stepUp = Step.up(1)
-    var stepLeft = Step.left(-1)
-    var stepRight = Step.right(1)
-    
-    mySteps[0] = stepUp
+    var mySteps : [Step] = afterSteps
+    var adjustedStep = startingAt
     for element in mySteps    {
-        if element == stepDown
+        switch element   {
+        case .right:
+            adjustedStep.0 += 1
+            print()
+        case .down:
+            print()
+            
+        default:
+            print("Where?")
+        }
     }
     
     
@@ -96,21 +98,38 @@ enum Coin: Int {
 }
 
 // Your function here
+func getTotalValue(from tuples:[(numberOfCoins: Int, typeOfCoin : Coin)]) -> Int {
+    var totalNumberOfCents = 0
+    for tuple in tuples {
+        switch tuple.typeOfCoin  { //access enum coin part in tuple
+        case .penny:
+            //multipky by tuple(for loop interator) so tuple.numberOfCoins or tuple.0
+            totalNumberOfCents += Coin.penny.rawValue * tuple.numberOfCoins //penny value Int(1)
+        case .nickle:
+            totalNumberOfCents += Coin.nickle.rawValue * tuple.numberOfCoins
+        case .dime:
+            totalNumberOfCents += Coin.dime.rawValue * tuple.numberOfCoins
+        case .quarter:
+            totalNumberOfCents += Coin.quarter.rawValue * tuple.numberOfCoins
+        }
+    }
+    return totalNumberOfCents
+}
 
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
-//
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
+
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
 
 // Question Four
 
