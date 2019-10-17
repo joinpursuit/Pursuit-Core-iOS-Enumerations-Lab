@@ -4,23 +4,38 @@ import UIKit
 
 // a. Define an enumeration called iOSDeviceType with member values iPhone, iPad, iWatch. Create a variable called myiPad and assign it to .iPad.
 
-// Your code here
+//// Your code here
+enum IOSDeviceType {
+    case iPhone(model: String)
+    case iPad(model: String)
+    case iWatch
+}
+var myiPad = IOSDeviceType.iPad
+//myiPad = .iPad
 
-// Uncomment the lines below to test your solution
-
-//let myiPad = iOSDeviceType.iPad
+// // Uncomment the lines below to test your solution
+////
+//let myiPad = IOSDeviceType.iPad
 //assert(myiPad == .iPad)
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
+//enum IOSDeviceType {
+//    case iPhone(model: String)
+//    case iPad(model: String)
+//    case iWatch
+//}
+
+var myPhone = IOSDeviceType.iPhone(model: "8+")
 
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+switch myPhone {
+case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myPhone)")
+}
+print(myPhone)
 
 // Question Two
 
@@ -32,12 +47,19 @@ import UIKit
 //A step .left will decrease the x coordinate by 1.
 
 
-enum Step {
-    case up
-    case down
-    case left
-    case right
-}
+//enum Step {
+//    case up
+//    case down
+//    case left
+//    case right
+//
+//    func getPosition(startingAt: Int, afterSteps: Int) -> (Int, Int) {
+//
+//        let return =
+//        return result
+//    }
+//}
+
 
 // Your function here
 
@@ -54,36 +76,72 @@ enum Step {
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
 
-enum Coin: Int {
-    case penny = 1
-    case nickle = 5
-    case dime = 10
-    case quarter = 25
-}
+//enum Coin: Int {
+//    case penny = 1
+//    case nickle = 5
+//    case dime = 10
+//    case quarter = 25
+//
+//    func getTotalValue(from: Array,(number: Int, coin: Coin) -> Int {
+//
+//    }
+//}
 
 // Your function here
-
-// Uncomment the lines below to test your solution
-
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
 //
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+//// Uncomment the lines below to test your solution
+//
+////let coinArr: [(Int, Coin)] = [
+////    (10, .penny),
+////    (15, .nickle),
+////    (3, .quarter),
+////    (20, .penny),
+////    (3, .dime),
+////    (7, .quarter)
+////]
+////
+////let expectedTotal = 385
+////let total = getTotalValue(from: coinArr)
+////assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+//
+//// Question Four
+//
+//// Write an enum called Day to represent the days of the week with a raw value of type String.
+//// Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
+//
+//// Your code here
+//enum Day {
+//    case monday(String = "weekday")
+//    case tuesday(String = "weekday")
+//    case wednesday(String = "weekday")
+//    case thursday(String = "weekday")
+//    case friday(String = "weekday")
+//    case saturday(String = "weekend")
+//    case sunday(String = "weekend")
+//
+//    func isWeekday() -> Bool {
+//        switch self {
+//        case .monday(let firstDayOfTheWeek):
+//            print("Monday is a \(firstDayOfTheWeek)")
+//        case .tuesday(let secondDayOfWeek):
+//            print("Tuesday is a \(secondDayOfWeek)")
+//        case .wednesday(let thirdDayOfWeek):
+//            print("Wednesday is a \(thirdDayOfWeek)")
+//        case .thursday(let fourthDayOfWeek):
+//            print("Thursday is a \(fourthDayOfWeek)")
+//        case .friday(let fifthDayOfWeek):
+//            print("Friday is a \(fifthDayOfWeek)")
+//        case .saturday(let sixthdDayOfWeek):
+//            print("Saturday is a \(sixthdDayOfWeek)")
+//        case .sunday(let seventhDayOfWeek):
+//            print("Sunday is a \(seventhDayOfWeek)")
+//        }
+//        return true
+//    }
+//
+//}
+//Day.monday.isWeekday()
 
-// Question Four
-
-// Write an enum called Day to represent the days of the week with a raw value of type String.
-// Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
-
-// Your code here
 
 // Uncomment the lines below to test your solution
 
@@ -119,3 +177,4 @@ enum Coin: Int {
 //    let output = matchResult(fromPlayerOneShape: testCase.0, andPlayerTwoShape: testCase.1)
 //    assert(output == expectedOutput, "Was execting \(expectedOutput), but got \(output) for inputs \(testCase.0) and \(testCase.1)")
 //}
+
