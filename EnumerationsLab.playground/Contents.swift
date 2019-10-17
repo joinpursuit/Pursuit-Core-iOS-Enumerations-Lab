@@ -175,19 +175,49 @@ assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
 //
 //Rock beats scissors, paper beats rock, scissor beats paper
 
-// Your code here
+// Answer:
+
+enum HandShape{
+    case rock
+    case paper
+    case scissors
+}
+
+enum MatchResult {
+    case win
+    case draw
+    case lose
+}
+
+func matchResult(fromPlayerOneShape: HandShape, andPlayerTwoShape: HandShape) -> MatchResult {
+    var outcome = MatchResult.win
+    
+    if fromPlayerOneShape == andPlayerTwoShape {
+        outcome = MatchResult.draw
+        // loss options
+    } else if fromPlayerOneShape == HandShape.scissors && andPlayerTwoShape == HandShape.rock || fromPlayerOneShape == HandShape.rock && andPlayerTwoShape == HandShape.paper || fromPlayerOneShape == HandShape.paper && andPlayerTwoShape == HandShape.scissors {
+        outcome = MatchResult.lose
+
+    } else {
+        outcome
+    }
+    return outcome
+}
+
 
 // Uncomment the lines below to test your solution
 
-//let testCases: [(HandShape, HandShape, MatchResult)] = [
-//    (.rock, .paper, .lose),
-//    (.paper, .paper, .draw),
-//    (.scissors, .rock, .lose),
-//    (.rock, .scissors, .win)
-//]
-//
-//for testCase in testCases {
-//    let expectedOutput = testCase.2
-//    let output = matchResult(fromPlayerOneShape: testCase.0, andPlayerTwoShape: testCase.1)
-//    assert(output == expectedOutput, "Was execting \(expectedOutput), but got \(output) for inputs \(testCase.0) and \(testCase.1)")
-//}
+let testCases: [(HandShape, HandShape, MatchResult)] = [
+    (.rock, .paper, .lose),
+    (.paper, .paper, .draw),
+    (.scissors, .rock, .lose),
+    (.rock, .scissors, .win)
+]
+
+
+
+for testCase in testCases {
+    let expectedOutput = testCase.2
+    let output = matchResult(fromPlayerOneShape: testCase.0, andPlayerTwoShape: testCase.1)
+    assert(output == expectedOutput, "Was execting \(expectedOutput), but got \(output) for inputs \(testCase.0) and \(testCase.1)")
+}
