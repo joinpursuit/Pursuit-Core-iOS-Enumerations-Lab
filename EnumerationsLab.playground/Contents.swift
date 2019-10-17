@@ -91,22 +91,43 @@ enum Coin: Int { // rawValue of type Int
     case quarter = 25
 }
 
-// Your function here
+// Answer:
+func getTotalValue(from arr: [(number: Int, coin: Coin)]) -> Int {
+    var totalVal = 0
+    
+    for tuple in arr {
+        switch tuple.coin {
+        case .penny:
+            totalVal += tuple.number * Coin.penny.rawValue
+        case .nickle:
+            totalVal += tuple.number * Coin.nickle.rawValue
+        case .dime:
+        totalVal += tuple.number * Coin.dime.rawValue
+        case .quarter:
+        totalVal += tuple.number * Coin.quarter.rawValue
+        }
+        
+    }
+    
+    return totalVal
+}
 
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
-//
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
+
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+
+
 
 // Question Four
 
