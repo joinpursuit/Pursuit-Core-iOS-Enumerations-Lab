@@ -134,17 +134,38 @@ assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)
 // Write an enum called Day to represent the days of the week with a raw value of type String.
 // Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
 
-// Your code here
+// Answer:
+
+enum Day: String {
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    case sunday
+    
+    func isWeekday() -> Bool {
+        var weekday = false
+        switch self {
+        case .monday, .tuesday, .wednesday, .thursday, .friday:
+            weekday = true
+        default:
+            weekday
+        }
+     return weekday
+    }
+}
 
 // Uncomment the lines below to test your solution
 
-//assert(Day.monday.isWeekday() == true, "Monday is a weekday")
-//assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
-//assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
-//assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
-//assert(Day.friday.isWeekday() == true, "Friday is a weekday")
-//assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
-//assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
+assert(Day.monday.isWeekday() == true, "Monday is a weekday")
+assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
+assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
+assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
+assert(Day.friday.isWeekday() == true, "Friday is a weekday")
+assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
+assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
 
 // Question Five
 
