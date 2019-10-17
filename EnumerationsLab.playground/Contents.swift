@@ -88,13 +88,13 @@ func getTotalValue(from arr: [(number: Int, coin: Coin)]) -> Int {
     for element in arr {
         switch element.coin {
         case .penny:
-            sum += element.0 * 1
+            sum += element.0 * Coin.penny.rawValue
         case .nickle:
-            sum += element.0 * 5
+            sum += element.0 * Coin.nickle.rawValue
         case .dime:
-            sum += element.0 * 10
+            sum += element.0 * Coin.dime.rawValue
         case .quarter:
-            sum += element.0 * 25
+            sum += element.0 * Coin.quarter.rawValue
         }
     }
     return sum
