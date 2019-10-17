@@ -39,16 +39,16 @@ default: fatalError("Was expecting an iPhone but got \(myPhone)")
 //A step .left will decrease the x coordinate by 1.
 
 
-enum Step {
-    case up(y: Int)
-    case down(y: Int)
-    case left(x: Int)
-    case right(x: Int)
-    
-    func getPosition(startingAt: (Int, Int) -> (Int, Int)) {
-        
-    }
-}
+//enum Step {
+//    case up(y: Int)
+//    case down(y: Int)
+//    case left(x: Int)
+//    case right(x: Int)
+//
+//    func getPosition(startingAt: (Int, Int) -> (Int, Int)) {
+//
+//    }
+//}
 
 // Your function here
 
@@ -70,8 +70,27 @@ enum Coin: Int {
     case nickle = 5
     case dime = 10
     case quarter = 25
-}
 
+
+func getTotalValue() { //arr:([(Int, Coin)]) -> Int
+    var totalArray = [Int]()
+    var coinArr: [(Int, Coin)] = [
+        (10, .penny),
+        (15, .nickle),
+        (3, .quarter),
+        (20, .penny),
+        (3, .dime),
+        (7, .quarter)
+    ]
+    for num in coinArr {
+        totalArray.append(num.0 * num.1.rawValue)
+    }
+    let total = totalArray.reduce(0, +)
+    print(total)
+}
+}
+let total = Coin.penny
+total.getTotalValue()
 // Your function here
 
 // Uncomment the lines below to test your solution
@@ -95,6 +114,18 @@ enum Coin: Int {
 // Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
 
 // Your code here
+enum Day: String {
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    case sunday
+    func isWeekday() {
+        
+    }
+}
 
 // Uncomment the lines below to test your solution
 
