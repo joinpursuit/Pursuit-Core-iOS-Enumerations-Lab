@@ -51,28 +51,76 @@ default: fatalError("Was expecting an iPhone but got \(myPhone)")
 //}
 
 // Your function here
+enum Step {
+    case up(y: Int)
+    case down(y: Int)
+    case left(x: Int)
+    case right(x: Int)
 
+}
+
+func getPosition(startingAt: (Int, Int), afterSteps: [Step]) -> (Int, Int) {
+    var startPosition = startingAt
+    for step in afterSteps {
+        switch step {
+        case .up:
+            startPosition.1 += 1
+        case .down:
+            startPosition.1 -= 1
+        case .left:
+            startPosition.0 -= 1
+        case .right:
+            startPosition.0 += 1
+        }
+        
+    }
+return startPosition
+    }
+
+
+
+//let firstEnum = Step.down(y: 1)
+//let test = [Step.up(y: 2), Step.down(y: 1), Step.right(x: 3)]
+//
+//let startDefault = (x:0, y:0)
+//let position = getPosition(startingAt: startDefault, afterSteps: test)
+//print(position)
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
-//
-//assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [.up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+
+assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
 
 // Question Three
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
+
+
+//var coinArr = [
+//    (10, Coin.penny),
+//    (15, Coin.nickle),
+//    (3, Coin.quarter),
+//    (20, Coin.penny),
+//    (3, Coin.dime),
+//    (7, Coin.quarter)
+//]
+//let total = getTotalValue(from: coinArr)
+//print(total)
+//print(total)
+//total.getTotalValue()
+// Your function here
 
 enum Coin: Int {
     case penny = 1
     case nickle = 5
     case dime = 10
     case quarter = 25
+}
 
-
-func getTotalValue() { //arr:([(Int, Coin)]) -> Int
+func getTotalValue(from:[(Int, Coin)]) -> Int { //arr:([(Int, Coin)]) -> Int
     var totalArray = [Int]()
     var coinArr: [(Int, Coin)] = [
         (10, .penny),
@@ -86,27 +134,23 @@ func getTotalValue() { //arr:([(Int, Coin)]) -> Int
         totalArray.append(num.0 * num.1.rawValue)
     }
     let total = totalArray.reduce(0, +)
-    print(total)
+    return total
 }
-}
-let total = Coin.penny
-total.getTotalValue()
-// Your function here
 
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
-//
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
+
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
 
 // Question Four
 
