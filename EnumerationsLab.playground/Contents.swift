@@ -17,7 +17,7 @@ var myiPad = iOSDeviceType.iPad
 // Uncomment the lines below to test your solution
 
 //var myiPad = iOSDeviceType.iPad
-//assert(myiPad = .iPad)
+//assert(myiPad == .iPad)
 
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
@@ -53,19 +53,21 @@ enum Step {
 }
 //
 // Your function here
-func getPosition(startingAt: (x: Int, y: Int), afterSteps: [Array<String>] ) -> (x: Int, y: Int){
+func getPosition(startingAt: (x: Int, y: Int), afterSteps: [Array<Step>] ) -> (x: Int, y: Int) {
     var x = Int()
     var y = Int()
     let coordinates = (x , y)
-    switch steps{
-    case .up:
-        (x, (y += 1))
-    case .down:
+    for Step in afterSteps{
+    switch Step {
+        case up:
+        (y += 1)
+        case down :
         y -= 1
-    case .left:
-       x += 1
-    case .right:
+        case left :
+        x += 1
+        case right :
          x -= 1
+    }
     }
     return (x,y)
 }
@@ -90,6 +92,10 @@ enum Coin: Int {
 }
 
 // Your function here
+
+func getTotalValue(from coinArray: [(Int,Coin)]) -> Coin{
+    
+}
 
 // Uncomment the lines below to test your solution
 
@@ -121,25 +127,26 @@ enum Day: String {
     case saturday
     case sunday
   
-//    func isWeekday() -> Bool {
-//       switch self {
-//       case .monday:
-//
-//       case .tuesday:
-//           true
-//       case .wednesday:
-//          true
-//       case .thursday:
-//           true
-//       case .friday:
-//           true
-//       case .saturday:
-//           false
-//       case .sunday:
-//          false
-//       }
-//       return
+    func isWeekday() -> Bool {
+       switch self {
+       case .monday:
+          return true
+       case .tuesday:
+           return true
+       case .wednesday:
+          return true
+       case .thursday:
+           return true
+       case .friday:
+           return true
+       case .saturday:
+           return false
+       case .sunday:
+          return false
+       }
+    
    }
+}
     
 // Uncomment the lines below to test your solution
 
@@ -160,6 +167,30 @@ assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
 //Rock beats scissors, paper beats rock, scissor beats paper
 
 // Your code here
+enum Handshape {
+case rock
+case paper
+case scissors
+}
+enum MatchResult {
+case win
+case draw
+case lose
+}
+func matchResult(fromPlayerOneShape: Handshape ,andPlayerTwoShape: Handshape ) -> MatchResult{
+    for fromPlayerOneShape {
+        if Handshape == .rock{
+            
+        }
+    }
+    
+    
+    
+}
+
+
+
+
 
 // Uncomment the lines below to test your solution
 
