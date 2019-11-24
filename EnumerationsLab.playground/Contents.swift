@@ -6,28 +6,28 @@ import UIKit
 
 //// Your code here
 enum IOSDeviceType {
-    case iPhone(model: String)
-    case iPad(model: String)
+    case iPhone
+    case iPad
     case iWatch
 }
 var myiPad = IOSDeviceType.iPad
-//myiPad = .iPad
+myiPad = .iPad
 
 // // Uncomment the lines below to test your solution
 ////
 //let myiPad = IOSDeviceType.iPad
-//assert(myiPad == .iPad)
+assert(myiPad == .iPad)
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
-//enum IOSDeviceType {
-//    case iPhone(model: String)
-//    case iPad(model: String)
-//    case iWatch
-//}
+enum IOSDeviceType2 {
+    case iPhone(model: String)
+    case iPad(model: String)
+    case iWatch
+}
 
-var myPhone = IOSDeviceType.iPhone(model: "8+")
+var myPhone = IOSDeviceType2.iPhone(model: "8+")
 
 // Uncomment the lines below to test your solution
 
@@ -47,44 +47,57 @@ print(myPhone)
 //A step .left will decrease the x coordinate by 1.
 
 
-//enum Step {
-//    case up
-//    case down
-//    case left
-//    case right
-//
-//    func getPosition(startingAt: Int, afterSteps: Int) -> (Int, Int) {
-//
-//        let return =
-//        return result
-//    }
-//}
-
-
 // Your function here
+
+enum Step {
+    case up
+    case down
+    case left
+    case right
+}
+    
+func getPosition(startingAt: (Int, Int), afterSteps: [Step]) -> (Int, Int) {
+    var x = 0
+    var y = 0
+    for position in afterSteps {
+        switch position {
+        case .up:
+            y += 1
+        case .down:
+            y -= 1
+        case .left:
+            x -= 1
+        case .right:
+            x += 1
+        }
+    }
+    return( x, y)
+}
 
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
-//
-//assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [.up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+
+assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+
+
 
 // Question Three
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
 
 enum Coin: Int {
-    case penny = 1
-    case nickle = 5
-    case dime = 10
-    case quarter = 25
-    }
-
-
+case penny = 1
+case nickle = 5
+case dime = 10
+case quarter = 25
+}
 // Your function here
+
+
 func getTotalValue(from tuples: [(numberOfCoins: Int, typeOfCoin: Coin)]) -> Int {
   var totalNumberOfCents = 0
   for tuple in tuples {
@@ -101,9 +114,11 @@ func getTotalValue(from tuples: [(numberOfCoins: Int, typeOfCoin: Coin)]) -> Int
   }
   return totalNumberOfCents
 }
+
+
 //
  //Uncomment the lines below to test your solution
-
+//
 let coinArr: [(Int, Coin)] = [
     (10, .penny),
     (15, .nickle),
@@ -123,48 +138,45 @@ assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)
 //// Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
 //
 //// Your code here
-//enum Day {
-//    case monday(String = "weekday")
-//    case tuesday(String = "weekday")
-//    case wednesday(String = "weekday")
-//    case thursday(String = "weekday")
-//    case friday(String = "weekday")
-//    case saturday(String = "weekend")
-//    case sunday(String = "weekend")
-//
-//    func isWeekday() -> Bool {
-//        switch self {
-//        case .monday(let firstDayOfTheWeek):
-//            print("Monday is a \(firstDayOfTheWeek)")
-//        case .tuesday(let secondDayOfWeek):
-//            print("Tuesday is a \(secondDayOfWeek)")
-//        case .wednesday(let thirdDayOfWeek):
-//            print("Wednesday is a \(thirdDayOfWeek)")
-//        case .thursday(let fourthDayOfWeek):
-//            print("Thursday is a \(fourthDayOfWeek)")
-//        case .friday(let fifthDayOfWeek):
-//            print("Friday is a \(fifthDayOfWeek)")
-//        case .saturday(let sixthdDayOfWeek):
-//            print("Saturday is a \(sixthdDayOfWeek)")
-//        case .sunday(let seventhDayOfWeek):
-//            print("Sunday is a \(seventhDayOfWeek)")
-//        }
-//        return true
-//    }
-//
-//}
-//Day.monday.isWeekday()
 
+enum Day: String {
+    case monday = "Monday is a weekday"
+    case tuesday = "Tuesday is a weekday"
+    case wednesday = "Wednesday is a weekday"
+    case thursday = "Thursday is a weekday"
+    case friday = "Friday is a weekday"
+    case saturday = "Saturday is not a weekday"
+    case sunday = "Sunday is not a weekday"
+    
+    func isWeekday() -> Bool {
+        switch self {
+        case .monday:
+            return true
+        case .tuesday:
+            return true
+        case .wednesday:
+            return true
+        case .thursday:
+            return true
+        case .friday:
+            return true
+        case .saturday:
+            return false
+        case .sunday:
+            return false
+        }
+    }
+}
 
 // Uncomment the lines below to test your solution
 
-//assert(Day.monday.isWeekday() == true, "Monday is a weekday")
-//assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
-//assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
-//assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
-//assert(Day.friday.isWeekday() == true, "Friday is a weekday")
-//assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
-//assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
+assert(Day.monday.isWeekday() == true, "Monday is a weekday")
+assert(Day.tuesday.isWeekday() == true, "Tuesday is a weekday")
+assert(Day.wednesday.isWeekday() == true, "Wednesday is a weekday")
+assert(Day.thursday.isWeekday() == true, "Thursday is a weekday")
+assert(Day.friday.isWeekday() == true, "Friday is a weekday")
+assert(Day.saturday.isWeekday() == false, "Saturday is not a weekday")
+assert(Day.sunday.isWeekday() == false, "Sunday is not a weekday")
 
 // Question Five
 
@@ -175,6 +187,23 @@ assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)
 //Rock beats scissors, paper beats rock, scissor beats paper
 
 // Your code here
+
+enum HandShape {
+    case rock
+    case paper
+    case scissors
+}
+
+enum MatchResult {
+    case win
+    case draw
+    case lose
+}
+
+//func matchResult(fromPlayerOneShape: HandShape,andPlayerTwoShape: HandShape) -> MatchResult {
+//    return result
+//    }
+
 
 // Uncomment the lines below to test your solution
 
