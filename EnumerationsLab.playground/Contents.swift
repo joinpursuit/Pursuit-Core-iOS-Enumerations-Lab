@@ -6,7 +6,14 @@ import UIKit
 
 // Your code here
 
-// Uncomment the lines below to test your solution
+enum iOSDeviceType {
+    case iPhone(model: String)
+    case iPad(model: String)
+    case iWatch
+}
+//var myiPad = iOSDeviceType.iPad
+//myiPad = .iPad
+ //Uncomment the lines below to test your solution
 
 //let myiPad = iOSDeviceType.iPad
 //assert(myiPad == .iPad)
@@ -14,13 +21,13 @@ import UIKit
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
-
+var myPhone = iOSDeviceType.iPhone(model: "8+")
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+switch myPhone {
+case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myPhone)")
+}
 
 // Question Two
 
@@ -32,27 +39,79 @@ import UIKit
 //A step .left will decrease the x coordinate by 1.
 
 
-enum Step {
-    case up
-    case down
-    case left
-    case right
-}
+//enum Step {
+//    case up(y: Int)
+//    case down(y: Int)
+//    case left(x: Int)
+//    case right(x: Int)
+//
+//    func getPosition(startingAt: (Int, Int) -> (Int, Int)) {
+//
+//    }
+//}
 
 // Your function here
+enum Step {
+    case up(y: Int)
+    case down(y: Int)
+    case left(x: Int)
+    case right(x: Int)
 
+}
+
+func getPosition(startingAt: (Int, Int), afterSteps: [Step]) -> (Int, Int) {
+    var startPosition = startingAt
+    for step in afterSteps {
+        switch step {
+        case .up:
+            startPosition.1 += 1
+        case .down:
+            startPosition.1 -= 1
+        case .left:
+            startPosition.0 -= 1
+        case .right:
+            startPosition.0 += 1
+        }
+        
+    }
+return startPosition
+    }
+
+
+
+//let firstEnum = Step.down(y: 1)
+//let test = [Step.up(y: 2), Step.down(y: 1), Step.right(x: 3)]
+//
+//let startDefault = (x:0, y:0)
+//let position = getPosition(startingAt: startDefault, afterSteps: test)
+//print(position)
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
-//
-//assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [.up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+
+assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
 
 // Question Three
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
+
+
+//var coinArr = [
+//    (10, Coin.penny),
+//    (15, Coin.nickle),
+//    (3, Coin.quarter),
+//    (20, Coin.penny),
+//    (3, Coin.dime),
+//    (7, Coin.quarter)
+//]
+//let total = getTotalValue(from: coinArr)
+//print(total)
+//print(total)
+//total.getTotalValue()
+// Your function here
 
 enum Coin: Int {
     case penny = 1
@@ -61,22 +120,37 @@ enum Coin: Int {
     case quarter = 25
 }
 
-// Your function here
+func getTotalValue(from:[(Int, Coin)]) -> Int { //arr:([(Int, Coin)]) -> Int
+    var totalArray = [Int]()
+    var coinArr: [(Int, Coin)] = [
+        (10, .penny),
+        (15, .nickle),
+        (3, .quarter),
+        (20, .penny),
+        (3, .dime),
+        (7, .quarter)
+    ]
+    for num in coinArr {
+        totalArray.append(num.0 * num.1.rawValue)
+    }
+    let total = totalArray.reduce(0, +)
+    return total
+}
 
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
-//
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
+
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
 
 // Question Four
 
@@ -84,6 +158,18 @@ enum Coin: Int {
 // Write a method inside Day that returns whether or not it is a weekday (Monday - Friday)
 
 // Your code here
+enum Day: String {
+    case monday
+    case tuesday
+    case wednesday
+    case thursday
+    case friday
+    case saturday
+    case sunday
+    func isWeekday() {
+        
+    }
+}
 
 // Uncomment the lines below to test your solution
 
